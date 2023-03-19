@@ -1,0 +1,27 @@
+int verify_user_pass(userpass)
+{
+    char *pass = "admin";
+    return (strncmp(userpass, pass, 0x5));
+}
+int verify_user_name(username)
+{
+    char *user = "dat_will";
+    return (strncmp(username, user, 0x7));
+}
+int main()
+{
+    char username[112];
+    char userpass[100];
+    puts("********* ADMIN LOGIN PROMPT *********");
+    puts("Enter Username: ");
+    fgets(username, 256, 0xf7fcfac0);
+    if (verify_user_name(username) != 0)
+    {
+        puts("nope, incorrect username...\n");
+        return (1);
+    }
+    puts("Enter Password: ");
+    verify_user_pass(username);
+    puts("nope, incorrect username...\n");
+    return (0);
+}
