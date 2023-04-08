@@ -1,11 +1,21 @@
+#include <stdio.h>
+#include <string.h>
 int main()
 {
-    char tmp[0x120];
+    char buffer[0x120];
 
-    0x7fffffffe584
+    0x7fffffffe584;
 
-        0x7fffffffe500
+    0x7fffffffe500;
 
-        0x7fffffffe490;
-    fopen("/home/users/level03/.pass", "r");
+    0x7fffffffe490;
+    FILE *a = fopen("/home/users/level03/.pass", "r"); // rbp-0x8
+    if (!a)
+    {
+        fwrite("ERROR: failed to open password file", 1, 36, a);
+        exit(1);
+    }
+    size_t tmp = fread(buffer, 1, 0x29, a); // rbp-0xc
+    size_t tmp2 = strcspn(buffer, "\n");
+    buffer[tmp2] = '\0';
 }
