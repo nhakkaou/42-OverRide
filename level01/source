@@ -1,27 +1,41 @@
-int verify_user_pass(userpass)
-{
-    char *pass = "admin";
-    return (strncmp(userpass, pass, 0x5));
+char a_user_name;
+
+int verify_user_name(){
+    char *ptr = "dat_wil"
+    puts("verifying username....\n");
+    return strncmp(ptr, &a_user_name, 7);
+
 }
-int verify_user_name(username)
-{
-    char *user = "dat_will";
-    return (strncmp(username, user, 0x7));
+
+int verify_user_pass(char Password){
+    return strncmp(Password, "admin", 5);
 }
-int main()
-{
-    char username[112];
-    char userpass[100];
+
+int main(){
+
+    char buffer[16];
+    memset(buffer, 0, 16);
     puts("********* ADMIN LOGIN PROMPT *********");
-    puts("Enter Username: ");
-    fgets(username, 256, 0xf7fcfac0);
-    if (verify_user_name(username) != 0)
-    {
+    printf("Enter Username: ");
+    fgets(a_user_name, 0x100, stdin);
+    
+    if(verify_user_name() != 0){
         puts("nope, incorrect username...\n");
-        return (1);
+        return 1;
     }
+    
     puts("Enter Password: ");
-    verify_user_pass(username);
-    puts("nope, incorrect username...\n");
-    return (0);
+    fgets(buffer, 0x64, stdin);
+    int eax = verify_user_pass(buffer);
+    if (eax== 0 ){
+        puts("nope, incorrect password...\n");
+        return 1;
+    };
+
+    if(eax == 0){
+        return 0;
+    }
+
+    
+
 }
