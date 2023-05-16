@@ -35,7 +35,4 @@ int main(){
     if(eax == 0){
         return 0;
     }
-
-    
-
 }
