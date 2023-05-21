@@ -1,0 +1,19 @@
+int main(){
+
+   int i = 0;
+   char *buffer;
+   fgets(buffer, 0x64, stdin);
+
+   var_1 = 0;
+   int len = strlen(buffer);
+while(i < len){
+
+
+
+    i++;
+}
+
+    printf(buffer)
+    exit(0);    
+
+}

@@ -1,0 +1,21 @@
+int main()
+{
+    void *var //esp+0x20
+    int pid = fork();
+    int var_1 = 0;
+    int var_2 = 0;
+    memset(&v, 0, 0x20);
+
+    if(pid == 0 ){
+        prctl(0x1, 0x1);
+        ptrace(0x0, 0x0, 0x0, 0x0);
+        puts("Give me some shellcode, k");
+        gets(&var);       
+
+    }else{
+        // +161
+        wait(&var_1);
+
+    }
+    return 0; 
+}

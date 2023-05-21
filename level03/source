@@ -1,0 +1,19 @@
+
+inte test(int ){
+
+}
+
+
+int main(){
+
+    int pasword;
+    srand(time(0));
+    puts("***********************************");
+    puts("*\t\tlevel03\t\t**")
+    puts("***********************************");
+    printf("Password:");
+    scanf("%d", &pasword);
+    test(password, 0x1337d00d);
+    return 0;
+    
+}
