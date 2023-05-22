@@ -11,6 +11,7 @@
    0x0804846e <+42>:    lea    eax,[esp+0x28]
    0x08048472 <+46>:    mov    DWORD PTR [esp],eax
    0x08048475 <+49>:    call   0x8048350 <fgets@plt>
+
    0x0804847a <+54>:    mov    DWORD PTR [esp+0x8c],0x0
    0x08048485 <+65>:    jmp    0x80484d3 <main+143>
    0x08048487 <+67>:    lea    eax,[esp+0x28]
@@ -32,6 +33,8 @@
    0x080484c2 <+126>:   add    eax,DWORD PTR [esp+0x8c]
    0x080484c9 <+133>:   mov    BYTE PTR [eax],dl
    0x080484cb <+135>:   add    DWORD PTR [esp+0x8c],0x1
+
+
    0x080484d3 <+143>:   mov    ebx,DWORD PTR [esp+0x8c]
    0x080484da <+150>:   lea    eax,[esp+0x28]
    0x080484de <+154>:   mov    DWORD PTR [esp+0x1c],0xffffffff
@@ -44,6 +47,7 @@
    0x080484f7 <+179>:   not    eax
    0x080484f9 <+181>:   sub    eax,0x1
    0x080484fc <+184>:   cmp    ebx,eax
+   
    0x080484fe <+186>:   jb     0x8048487 <main+67>
    0x08048500 <+188>:   lea    eax,[esp+0x28]
    0x08048504 <+192>:   mov    DWORD PTR [esp],eax

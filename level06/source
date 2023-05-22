@@ -1,0 +1,60 @@
+int auth(char *login, unsigned int serial){
+   int len;
+   login[strcspn(login, "\n")] = 0; // remove the \n from the input
+   len = strnlen(login, 0x20); // check the length of the input
+// 0x080487b5 ptrace adress
+    if(len > 5){
+        if(ptrace(0x0, 0x0, 0x1, 0x0)= -1){ // check if the program is being debugged
+        
+            puts("\033[32m.--------------------------.");
+            puts("\033[31m| !! TAMPERING DETECTED !!  |");
+            puts("\033[32m'--------------------------'");
+        return 1;
+        }else{
+
+            var_1 = (login[3] ^ 0x1337) + 0x5eeded //ebp-0x10
+            int i = 0; //ebp-0x14 index
+            while(i < len){
+                //ebp+0xc
+                // if(login[i] <= 0x1f){
+                //     return 1;
+                // }
+                // int var_2 = var_1 - login[i];
+                // var_1 = (var_1 - login[i]) ^ 0x1337;
+                // i++;
+            }
+        }
+    }
+    return 1;
+
+}
+
+
+int main(){
+// stack canary initialization
+
+    puts("***********************************");
+    puts("*\t\tlevel06\t\t  *");
+    puts("***********************************");
+    printf("-> Enter Login: ");
+
+    char *login;
+    fgets(&login, 0x20, stdin);
+    
+    puts("***********************************");
+    puts("***** NEW ACCOUNT DETECTED ********");
+    puts("***********************************");
+    printf("-> Enter Serial: ");
+    
+    int serial;
+    scanf("%u", &serial);
+    
+    if(auth(login, serial) == 0){
+        puts("Authenticated!");
+        system("/bin/sh");
+        return 0;
+    }
+
+// check the stack canary
+    return 1;
+}
