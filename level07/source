@@ -1,0 +1,28 @@
+int main(int ac, char **av)
+{
+    char *s = av;
+    memset(s);
+    puts(
+        "----------------------------------------------------\n  Welcome to wil\'s crappy number storage service!   \n----------------------------------------------------\n Commands:                                          \n    store - store a number into the data storage    \n    read  - read a number from the data storage     \n    quit  - exit the program                        \n----------------------------------------------------\n   wil has reserved some storage :>                 \n----------------------------------------------------\n");
+    puts(" Commands:\n
+                store - store a number into the data storage\n
+                read  - read a number from the data storage\n
+                quit  - exit the program\n
+        ----------------------------------------------------\n
+            wil has reserved some storage :>\n
+        ----------------------------------------------------");
+    char *key = "";
+     while(true)
+     {
+        puts("Input command:");
+        scanf("%s\n", key);
+        if (strcmp(key, "store") == 0)
+        {
+            // puts(" Number:");
+            // scanf("%s\n", number);
+            // puts(" Index:");
+            // scanf("%s\n", index);
+            read_number();
+        }
+     }
+}
