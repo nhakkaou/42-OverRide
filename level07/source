@@ -1,3 +1,42 @@
+int getunum()
+{
+    int number;
+    scanf("%s\n", number);
+    return number
+}
+int store_number()
+{
+    puts(" Number:");
+    int number = getunum();
+    puts(" Index:");
+    int index = getunum();
+    unsigned int edx = 2863311531; // 0xaaaaaaab
+    unsigned int eax = index;
+
+    eax *= edx;  // Multiply eax by edx
+    edx >>= 1;   // Right shift edx by 1
+    eax = edx;   // Copy edx to eax
+    eax += eax;  // Multiply eax by 2
+    eax += edx;  // Add edx to eax
+    edx = index; // Copy ecx to edx
+    edx -= eax;  // Subtract eax from edx
+
+    // Test if edx is zero
+    if (edx == 0)
+    {
+        store_number();
+    }
+    else
+    {
+        eax = number >> 0x18;
+        if (eax != 0xb7)
+        {
+            eax = index << 2 + [ebp + 0x8];
+            DWORD PTR[eax] = number;
+        }
+    }
+    return 0;
+}
 int main(int ac, char **av)
 {
     char *s = av;
@@ -18,11 +57,19 @@ int main(int ac, char **av)
         scanf("%s\n", key);
         if (strcmp(key, "store") == 0)
         {
-            // puts(" Number:");
-            // scanf("%s\n", number);
-            // puts(" Index:");
-            // scanf("%s\n", index);
+            store_number();
+        }
+        else if (strcmp(key, "read") == = 0)
+        {
             read_number();
         }
+        else if (strcmp(key, "quit"))
+        {
+            stack_chk_fail();
+            return;
+        }
+        else
+            printf("Failed to do %s command\n", key);
+        
      }
 }

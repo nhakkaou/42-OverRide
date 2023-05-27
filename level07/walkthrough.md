@@ -136,7 +136,86 @@ this program clear the Argument and Env Variables we put a break point in the li
 after that there's loop that compare the input with `store`, `read`, `quit` lets start check te store first
 
 ```
-   0x08048901 <+478>:   mov    eax,0x8048d61 // "store"
+(gdb) disass store_number
+Dump of assembler code for function store_number:
+   0x08048630 <+0>:     push   ebp
+   0x08048631 <+1>:     mov    ebp,esp
+   0x08048633 <+3>:     sub    esp,0x28
+   0x08048636 <+6>:     mov    DWORD PTR [ebp-0x10],0x0
+   0x0804863d <+13>:    mov    DWORD PTR [ebp-0xc],0x0
+   0x08048644 <+20>:    mov    eax,0x8048ad3 // " Number: "
+   0x08048649 <+25>:    mov    DWORD PTR [esp],eax
+   0x0804864c <+28>:    call   0x8048470 <printf@plt>
+   0x08048651 <+33>:    call   0x80485e7 <get_unum>
+   0x08048656 <+38>:    mov    DWORD PTR [ebp-0x10],eax
+   0x08048659 <+41>:    mov    eax,0x8048add // " Index: "
+   0x0804865e <+46>:    mov    DWORD PTR [esp],eax
+   0x08048661 <+49>:    call   0x8048470 <printf@plt>
+   0x08048666 <+54>:    call   0x80485e7 <get_unum>
+   0x0804866b <+59>:    mov    DWORD PTR [ebp-0xc],eax
+   0x0804866e <+62>:    mov    ecx,DWORD PTR [ebp-0xc]
+   0x08048671 <+65>:    mov    edx,0xaaaaaaab
+   0x08048676 <+70>:    mov    eax,ecx
+   0x08048678 <+72>:    mul    edx
+   0x0804867a <+74>:    shr    edx,1
+   0x0804867c <+76>:    mov    eax,edx
+   0x0804867e <+78>:    add    eax,eax
+   0x08048680 <+80>:    add    eax,edx
+   0x08048682 <+82>:    mov    edx,ecx
+   0x08048684 <+84>:    sub    edx,eax
+   0x08048686 <+86>:    test   edx,edx
+   0x08048688 <+88>:    je     0x8048697 <store_number+103>
+   0x0804868a <+90>:    mov    eax,DWORD PTR [ebp-0x10]
+   0x0804868d <+93>:    shr    eax,0x18
+   0x08048690 <+96>:    cmp    eax,0xb7
+   0x08048695 <+101>:   jne    0x80486c2 <store_number+146>
+   0x08048697 <+103>:   mov    DWORD PTR [esp],0x8048ae6 //  " *** ERROR! ***"
+   0x0804869e <+110>:   call   0x80484c0 <puts@plt>
+   0x080486a3 <+115>:   mov    DWORD PTR [esp],0x8048af8 // "   This index is reserved for wil!"
+   0x080486aa <+122>:   call   0x80484c0 <puts@plt>
+   0x080486af <+127>:   mov    DWORD PTR [esp],0x8048ae6 //  " *** ERROR! ***"
+   0x080486b6 <+134>:   call   0x80484c0 <puts@plt>
+   0x080486bb <+139>:   mov    eax,0x1
+   0x080486c0 <+144>:   jmp    0x80486d5 <store_number+165>
+   0x080486c2 <+146>:   mov    eax,DWORD PTR [ebp-0xc]
+   0x080486c5 <+149>:   shl    eax,0x2
+   0x080486c8 <+152>:   add    eax,DWORD PTR [ebp+0x8]
+   0x080486cb <+155>:   mov    edx,DWORD PTR [ebp-0x10]
+   0x080486ce <+158>:   mov    DWORD PTR [eax],edx
+   0x080486d0 <+160>:   mov    eax,0x0
+   0x080486d5 <+165>:   leave
+   0x080486d6 <+166>:   ret
+End of assembler dump.
+```
+
+in this part they read the value of the number and the index and then there's some operation and check a condition
+`DWORD PTR [ebp-0x10] Number, DWORD PTR [ebp-0xc] Index`
+
+```
+   0x0804866e <+62>:    mov    ecx,DWORD PTR [ebp-0xc]
+   0x08048671 <+65>:    mov    edx,0xaaaaaaab // 2863311531
+   0x08048676 <+70>:    mov    eax,ecx
+   0x08048678 <+72>:    mul    edx // this mean multiply edx , eax
+   0x0804867a <+74>:    shr    edx,1 //shift right
+   0x0804867c <+76>:    mov    eax,edx
+   0x0804867e <+78>:    add    eax,eax
+   0x08048680 <+80>:    add    eax,edx
+   0x08048682 <+82>:    mov    edx,ecx
+   0x08048684 <+84>:    sub    edx,eax
+   0x08048686 <+86>:    test   edx,edx
+```
+
+in the line <+72> `mul edx`
+
+```
+
+This instruction multiplies the value in eax with the value in edx. The multiplication is an unsigned multiplication. The product, a 64-bit value, is stored in edx:eax. The lower 32 bits of the product are stored in eax, and the upper 32 bits are stored in edx.
+```
+
+lets check what happend in the read part :
+
+```
+   0x08048901 <+478>:   mov    eax,0x8048d61 // "read"
    0x08048906 <+483>:   mov    ecx,0x4
    0x0804890b <+488>:   mov    esi,edx
    0x0804890d <+490>:   mov    edi,eax
@@ -189,4 +268,34 @@ Dump of assembler code for function read_number:
    0x08048721 <+74>:    leave
    0x08048722 <+75>:    ret
 End of assembler dump.
+```
+
+we found a function call `get_unum` that use the scanf to get a number from the stdin
+
+```
+Dump of assembler code for function get_unum:
+   0x080485e7 <+0>:     push   ebp
+   0x080485e8 <+1>:     mov    ebp,esp
+   0x080485ea <+3>:     sub    esp,0x28
+   0x080485ed <+6>:     mov    DWORD PTR [ebp-0xc],0x0
+   0x080485f4 <+13>:    mov    eax,ds:0x804a060
+   0x080485f9 <+18>:    mov    DWORD PTR [esp],eax
+   0x080485fc <+21>:    call   0x8048480 <fflush@plt>
+   0x08048601 <+26>:    mov    eax,0x8048ad0
+   0x08048606 <+31>:    lea    edx,[ebp-0xc]
+   0x08048609 <+34>:    mov    DWORD PTR [esp+0x4],edx
+   0x0804860d <+38>:    mov    DWORD PTR [esp],eax
+   0x08048610 <+41>:    call   0x8048500 <__isoc99_scanf@plt>
+   0x08048615 <+46>:    call   0x80485c4 <clear_stdin>
+   0x0804861a <+51>:    mov    eax,DWORD PTR [ebp-0xc]
+   0x0804861d <+54>:    leave
+   0x0804861e <+55>:    ret
+End of assembler dump.
+```
+
+after the read of the number in the line <+37> they use shl shift left by 0x2 and then add this number to DWORD PTR [ebp+0x8] and the print the number `" Number at data[%u] is %u\n"`
+
+```
+0x080486fc <+37>:    shl    eax,0x2
+0x080486ff <+40>:    add    eax,DWORD PTR [ebp+0x8]
 ```
