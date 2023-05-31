@@ -1,6 +1,53 @@
 #include <stdio.h>
 #include <string.h>
-int main()
+int main(int argc, char **argv)
 {
-    memset(0x0804a040, 0, 0x64);
+    void login; //rbp-0x70
+    memset(&login, 0, 0xc);
+    void file_content; //rbp-0xa0
+    memset(&file_content, 0, 0x5);
+    void password; //rbp-0x110
+    memset(&password, 0, 0xc);
+
+    long int file = 0; //rbp-0x8
+    int size = 0;           //rbp-0xc
+
+    file = fopen("/home/users/level03/.pass", "r");
+
+    if(file == 0){
+        fwite("ERROR: failed to open password file\n", 1, 0x24, stderr);
+        exit(1);
+    }
+
+    size = fread(&file_content, 1, 0x29, file);
+    file_content[strcspn(&file_content, "\n")] = 0;
+
+    if(size != 0x29){
+        fwrite("ERROR: failed to read password file\n", 1, 0x24, stderr);
+        fwrite("ERROR: failed to read password file\n", 1, 0x24, stderr);
+        exit(1);
+    }
+
+    fclose(file);
+
+    puts("===== [ Secure Access System v1.0 ] =====");
+    puts("/********************************************\\");
+    puts("| You must login to access this system.      |");
+    puts("\\********************************************/");
+    printf("--[ Username: ");
+    fgets(&login, 0x64, stdin);
+    login[strcspn(&login, "\n")] = 0;
+    printf("--[ Password: ");
+    fgets(&password, 0x64, stdin);
+    password[strcspn(&password, "\n")] = 0;
+    puts("**********************************************");
+
+    if(strncmp(&file_content, &password, 0x29) != 0){
+        printf(&login);
+        puts(" does not have access!");
+        exit(1);
+    }
+    printf("Greetings, %s!\n", &login);
+    system("/bin/sh");
+    return 0;
 }
