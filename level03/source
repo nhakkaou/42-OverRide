@@ -1,6 +1,23 @@
 
-inte test(int ){
+void decrypt(int input){
+    char *str = "Q}|u`sfg~sf{}|a";
 
+    int lent = strlen(str);
+    int i = 0;
+    while(i < lent){
+        str[i] = str[i] ^ input;
+        i++;
+    }
+}
+
+int test(int password, int input ){
+    int calc = input - password;
+    if(calc > 0x15){
+        decrypt(rand())
+    }else{
+        decrypt(calc)
+        return 0;
+    }
 }
 
 
@@ -13,7 +30,7 @@ int main(){
     puts("***********************************");
     printf("Password:");
     scanf("%d", &pasword);
-    test(password, 0x1337d00d);
+    test(password, 0x1337d00d);//322424845
     return 0;
     
 }
