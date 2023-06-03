@@ -8,7 +8,11 @@ void decrypt(int input){
         str[i] = str[i] ^ input;
         i++;
     }
-}
+    if(strcmp(str, "Congratulations!") == 0){
+        system("/bin/sh");  
+    }else{
+        puts("\nInvalid Password");
+    }
 
 int test(int password, int input ){
     int calc = input - password;
