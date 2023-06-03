@@ -20,7 +20,6 @@ int store_number()
     eax += edx;  // Add edx to eax
     edx = index; // Copy ecx to edx
     edx -= eax;  // Subtract eax from edx
-
     // Test if edx is zero
     if (edx == 0)
     {
