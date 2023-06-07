@@ -1,10 +1,10 @@
 int main()
 {
     void *var //esp+0x20
-    int pid = fork();
+    int pid = fork(); //esp+0xac
     int var_1 = 0;
     int var_2 = 0;
-    memset(&v, 0, 0x20);
+    memset(&var, 0x0, 0x20);
 
     if(pid == 0 ){
         prctl(0x1, 0x1);
@@ -14,8 +14,18 @@ int main()
 
     }else{
         // +161
-        wait(&var_1);
+        wait(&var_1 );
 
-    }
+        if((var_1 & 0x7f) != 0 &&  ((var_1 & 0x7f) + 1) >> 1 <= 0){
+            if(ptrace(0x3,pid,0x2c,0x0) == 0xb){
+                puts("no exec() for you");
+                kill(pid, 0x9);
+                return 0;
+            }
+        }
+        puts("Child is exiting...");
+        return ;
+        }
+    
     return 0; 
 }

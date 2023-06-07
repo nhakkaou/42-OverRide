@@ -31,9 +31,10 @@
    0x0804875e <+150>:   call   0x80484b0 <gets@plt>
    0x08048763 <+155>:   jmp    0x804881a <main+338>
    0x08048768 <+160>:   nop
-   0x08048769 <+161>:   lea    eax,[esp+0x1c]
+
+   0x08048769 <+161>:   lea    eax,[esp+0x1c] 
    0x0804876d <+165>:   mov    DWORD PTR [esp],eax
-   0x08048770 <+168>:   call   0x80484f0 <wait@plt>
+   0x08048770 <+168>:   call   0x80484f0 <wait@plt> 
    0x08048775 <+173>:   mov    eax,DWORD PTR [esp+0x1c]
    0x08048779 <+177>:   mov    DWORD PTR [esp+0xa0],eax
    0x08048780 <+184>:   mov    eax,DWORD PTR [esp+0xa0]
@@ -48,9 +49,11 @@
    0x080487a6 <+222>:   sar    al,1
    0x080487a8 <+224>:   test   al,al
    0x080487aa <+226>:   jle    0x80487ba <main+242>
+
    0x080487ac <+228>:   mov    DWORD PTR [esp],0x804891d
    0x080487b3 <+235>:   call   0x8048500 <puts@plt>
    0x080487b8 <+240>:   jmp    0x804881a <main+338>
+   
    0x080487ba <+242>:   mov    DWORD PTR [esp+0xc],0x0
    0x080487c2 <+250>:   mov    DWORD PTR [esp+0x8],0x2c
    0x080487ca <+258>:   mov    eax,DWORD PTR [esp+0xac]
@@ -67,6 +70,7 @@
    0x08048811 <+329>:   mov    DWORD PTR [esp],eax
    0x08048814 <+332>:   call   0x8048520 <kill@plt>
    0x08048819 <+337>:   nop
+
    0x0804881a <+338>:   mov    eax,0x0
    0x0804881f <+343>:   lea    esp,[ebp-0x8]
    0x08048822 <+346>:   pop    ebx
