@@ -1,17 +1,18 @@
 int main(){
 
-   int i = 0;
-   char *buffer;
-   fgets(buffer, 0x64, stdin);
+   int i = 0; //esp+0x8c
+   char *buffer; //esp+0x28
+   fgets(buffer, 0x64, stdin); 
 
    var_1 = 0;
    int len = strlen(buffer);
-while(i < len){
+    while(i < len){
 
-
-
-    i++;
-}
+        if(buffer[i] > 0x40 && buffer[i] < 0x5a){
+            buffer[i] = buffer[i] ^ 0x20;
+        }
+        i++;
+    }
 
     printf(buffer)
     exit(0);    
