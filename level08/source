@@ -1,0 +1,68 @@
+void log_wrapper(FILE *file_pointer /**rbp-0x118**/, char *message/**rbp-0x120**/,char *file/**rbp-0x128**/){
+
+    // canary init
+
+    char *dest; //rbp-0x110
+    size_t len_dest; 
+    strcpy(dest, message);
+    len_dest = strlen(dest);
+
+    size_t size_buff = 0xfe - len_dest;
+
+    rsi = rbp-0x128
+
+    snprintf(dest + len_dest, size_buff, file); 
+    dest[strcspn(dest, "\n")] = 0;
+    fprintf(file_pointer, "LOG: %s\n", dest);0
+    return;
+
+    // canary check
+}
+
+
+
+int main(int argc, char **argv){
+
+    FILE *log;
+    FILE *file;
+
+    if(argc != 2){
+        printf("Usage: %s filename\n", argv[0]);
+    }
+    log = fopen("./backups/.log", "w");
+    if(log == 0 ){
+        printf("ERROR: Failed to open %s\n", "./backups/.log");
+        exit(1);
+    }
+
+    log_wrapper(log,"Starting back up: %s\n", argv[1]);
+
+    file = fopen(argv[1], "r");
+    if(file == 0){
+        printf("ERROR: Failed to open %s\n", argv[1]);
+        exit(1);
+    }
+    
+    char *backups = "./backups/";
+    int len_backups = strlen(backups);
+    int buffer = 0x63 - len_backups;
+
+    strncat(backups, argv[1], buffer);
+
+
+    int fd = open(backups, 0xc1, 432);
+    if(fd < 0){
+        printf("ERROR: Failed to open %s%s\n", backups, argv[1]);
+        exit(1);
+    }
+
+    while(fgetc(fd)){
+        write(fd, file, 1);
+    }
+
+    log_wrapper(log, "Finished back up %s\n", argv[1]);
+    fclose(file);
+    close(fd);
+    return;
+
+}

@@ -12,7 +12,8 @@ Dump of assembler code for function main:
    0x08048896 <+29>:    xor    eax,eax
    0x08048898 <+31>:    je     0x804889d <main+36>
    0x0804889a <+33>:    add    esp,0x4
-   0x0804889d <+36>:    pop    eax
+   0x0804889d <+36>:    pop    eax //stack canary check 
+
    0x0804889e <+37>:    mov    DWORD PTR [esp],0x8048ad4
    0x080488a5 <+44>:    call   0x8048590 <puts@plt>
    0x080488aa <+49>:    mov    DWORD PTR [esp],0x8048af8
@@ -22,12 +23,14 @@ Dump of assembler code for function main:
    0x080488c2 <+73>:    mov    eax,0x8048b08
    0x080488c7 <+78>:    mov    DWORD PTR [esp],eax
    0x080488ca <+81>:    call   0x8048510 <printf@plt>
+
    0x080488cf <+86>:    mov    eax,ds:0x804a060
    0x080488d4 <+91>:    mov    DWORD PTR [esp+0x8],eax
    0x080488d8 <+95>:    mov    DWORD PTR [esp+0x4],0x20
    0x080488e0 <+103>:   lea    eax,[esp+0x2c]
    0x080488e4 <+107>:   mov    DWORD PTR [esp],eax
    0x080488e7 <+110>:   call   0x8048550 <fgets@plt>
+
    0x080488ec <+115>:   mov    DWORD PTR [esp],0x8048ad4
    0x080488f3 <+122>:   call   0x8048590 <puts@plt>
    0x080488f8 <+127>:   mov    DWORD PTR [esp],0x8048b1c
@@ -37,6 +40,7 @@ Dump of assembler code for function main:
    0x08048910 <+151>:   mov    eax,0x8048b40
    0x08048915 <+156>:   mov    DWORD PTR [esp],eax
    0x08048918 <+159>:   call   0x8048510 <printf@plt>
+   
    0x0804891d <+164>:   mov    eax,0x8048a60
    0x08048922 <+169>:   lea    edx,[esp+0x28]
    0x08048926 <+173>:   mov    DWORD PTR [esp+0x4],edx
@@ -49,20 +53,19 @@ Dump of assembler code for function main:
    0x08048941 <+200>:   call   0x8048748 <auth>
    0x08048946 <+205>:   test   eax,eax
    0x08048948 <+207>:   jne    0x8048969 <main+240>
-   0x0804894a <+209>:   mov    DWORD PTR [esp], 
-   0x08048951 <+216>:   call   0x8048590 <puts@plt>
-   0x08048956 <+221>:   mov    DWORD PTR [esp],0x8048b61
-   0x0804895d <+228>:   call   0x80485a0 <system@plt>
-   0x08048962 <+233>:   mov    eax,0x0
-   0x08048967 <+238>:   jmp    0x804896e <main+245>
-   0x08048969 <+240>:   mov    eax,0x1
-   0x0804896e <+245>:   mov    edx,DWORD PTR [esp+0x4c]
-   0x08048972 <+249>:   xor    edx,DWORD PTR gs:0x14
-   0x08048979 <+256>:   je     0x8048980 <main+263>
-   0x0804897b <+258>:   call   0x8048580 <__stack_chk_fail@plt>
-   0x08048980 <+263>:   leave
-   0x08048981 <+264>:   ret
-
+   0x0804894a <+209>:	mov    DWORD PTR [esp],0x8048b52
+   0x08048951 <+216>:	call   0x8048590 <puts@plt>
+   0x08048956 <+221>:	mov    DWORD PTR [esp],0x8048b61
+   0x0804895d <+228>:	call   0x80485a0 <system@plt>
+   0x08048962 <+233>:	mov    eax,0x0
+   0x08048967 <+238>:	jmp    0x804896e <main+245>
+   0x08048969 <+240>:	mov    eax,0x1
+   0x0804896e <+245>:	mov    edx,DWORD PTR [esp+0x4c]
+   0x08048972 <+249>:	xor    edx,DWORD PTR gs:0x14
+   0x08048979 <+256>:	je     0x8048980 <main+263>
+   0x0804897b <+258>:	call   0x8048580 <__stack_chk_fail@plt>
+   0x08048980 <+263>:	leave
+   0x08048981 <+264>:	ret
 
 Dump of assembler code for function auth:
    0x08048748 <+0>:     push   ebp
