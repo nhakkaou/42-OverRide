@@ -13,7 +13,7 @@ void decrypt(int input){
     }else{
         puts("\nInvalid Password");
     }
-
+}
 int test(int password, int input ){
     int calc = input - password;
     if(calc > 0x15){
@@ -24,7 +24,6 @@ int test(int password, int input ){
     }
 }
 
-
 int main(){
 
     int pasword;
@@ -34,7 +33,9 @@ int main(){
     puts("***********************************");
     printf("Password:");
     scanf("%d", &pasword);
-    test(password, 0x1337d00d);//322424845
+    test(password, 0x1337d00d);//322424845 - 322424827
     return 0;
     
 }
+
+

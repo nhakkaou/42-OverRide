@@ -1,0 +1,51 @@
+  0x00005555555549cd <+0>:	push   rbp
+   0x00005555555549ce <+1>:	mov    rbp,rsp
+   0x00005555555549d1 <+4>:	sub    rsp,0xa0
+   0x00005555555549d8 <+11>:	mov    QWORD PTR [rbp-0x98],rdi
+   0x00005555555549df <+18>:	lea    rax,[rbp-0x90]
+   0x00005555555549e6 <+25>:	mov    rsi,rax
+=> 0x00005555555549e9 <+28>:	mov    eax,0x0
+   0x00005555555549ee <+33>:	mov    edx,0x10
+   0x00005555555549f3 <+38>:	mov    rdi,rsi
+   0x00005555555549f6 <+41>:	mov    rcx,rdx
+   0x00005555555549f9 <+44>:	rep stos QWORD PTR es:[rdi],rax // memset $rbp-0x90
+   0x00005555555549fc <+47>:	lea    rdi,[rip+0x1e1]        # 0x555555554be4
+   0x0000555555554a03 <+54>:	call   0x555555554730 <puts@plt>
+   0x0000555555554a08 <+59>:	lea    rax,[rip+0x1d0]        # 0x555555554bdf
+   0x0000555555554a0f <+66>:	mov    rdi,rax
+   0x0000555555554a12 <+69>:	mov    eax,0x0
+   0x0000555555554a17 <+74>:	call   0x555555554750 <printf@plt>
+   0x0000555555554a1c <+79>:	mov    rax,QWORD PTR [rip+0x201595]        # 0x555555755fb8
+   0x0000555555554a23 <+86>:	mov    rax,QWORD PTR [rax]
+   0x0000555555554a26 <+89>:	mov    rdx,rax
+   0x0000555555554a29 <+92>:	lea    rax,[rbp-0x90]
+   0x0000555555554a30 <+99>:	mov    esi,0x80
+   0x0000555555554a35 <+104>:	mov    rdi,rax
+   0x0000555555554a38 <+107>:	call   0x555555554770 <fgets@plt>
+   0x0000555555554a3d <+112>:	mov    DWORD PTR [rbp-0x4],0x0
+   0x0000555555554a44 <+119>:	jmp    0x555555554a6a <set_username+157>
+   0x0000555555554a46 <+121>:	mov    eax,DWORD PTR [rbp-0x4]
+   0x0000555555554a49 <+124>:	cdqe
+   0x0000555555554a4b <+126>:	movzx  ecx,BYTE PTR [rbp+rax*1-0x90]
+   0x0000555555554a53 <+134>:	mov    rdx,QWORD PTR [rbp-0x98]
+   0x0000555555554a5a <+141>:	mov    eax,DWORD PTR [rbp-0x4]
+   0x0000555555554a5d <+144>:	cdqe
+   0x0000555555554a5f <+146>:	mov    BYTE PTR [rdx+rax*1+0x8c],cl
+   0x0000555555554a66 <+153>:	add    DWORD PTR [rbp-0x4],0x1
+   0x0000555555554a6a <+157>:	cmp    DWORD PTR [rbp-0x4],0x28
+   
+   0x0000555555554a6e <+161>:	jg     0x555555554a81 <set_username+180>
+   0x0000555555554a70 <+163>:	mov    eax,DWORD PTR [rbp-0x4]
+   0x0000555555554a73 <+166>:	cdqe
+   0x0000555555554a75 <+168>:	movzx  eax,BYTE PTR [rbp+rax*1-0x90]
+   0x0000555555554a7d <+176>:	test   al,al
+   0x0000555555554a7f <+178>:	jne    0x555555554a46 <set_username+121>
+   0x0000555555554a81 <+180>:	mov    rax,QWORD PTR [rbp-0x98]
+   0x0000555555554a88 <+187>:	lea    rdx,[rax+0x8c]
+   0x0000555555554a8f <+194>:	lea    rax,[rip+0x165]        # 0x555555554bfb
+   0x0000555555554a96 <+201>:	mov    rsi,rdx
+   0x0000555555554a99 <+204>:	mov    rdi,rax
+   0x0000555555554a9c <+207>:	mov    eax,0x0
+   0x0000555555554aa1 <+212>:	call   0x555555554750 <printf@plt>
+   0x0000555555554aa6 <+217>:	leave
+   0x0000555555554aa7 <+218>:	ret
