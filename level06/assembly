@@ -115,24 +115,29 @@ Dump of assembler code for function auth:
    0x080487f3 <+171>:   movzx  eax,BYTE PTR [eax]
    0x080487f6 <+174>:   movsx  eax,al
    0x080487f9 <+177>:   xor    eax,0x1337
-   0x080487fe <+182>:   add    eax,0x5eeded
-   0x08048803 <+187>:   mov    DWORD PTR [ebp-0x10],eax
-   0x08048806 <+190>:   mov    DWORD PTR [ebp-0x14],0x0
+   0x080487fe <+182>:   add    eax,0x5eeded 
+   0x08048803 <+187>:   mov    DWORD PTR [ebp-0x10],eax //var_1 char ^ 0x1337 + 0x5eeded
+   0x08048806 <+190>:   mov    DWORD PTR [ebp-0x14],0x0 int i = 0
    0x0804880d <+197>:   jmp    0x804885b <auth+275>
    
-   0x0804880f <+199>:   mov    eax,DWORD PTR [ebp-0x14]
-   0x08048812 <+202>:   add    eax,DWORD PTR [ebp+0x8]
-   0x08048815 <+205>:   movzx  eax,BYTE PTR [eax]
-   0x08048818 <+208>:   cmp    al,0x1f
+
+   0x0804880f <+199>:   mov    eax,DWORD PTR [ebp-0x14] // int i
+   0x08048812 <+202>:   add    eax,DWORD PTR [ebp+0x8]  // login + i
+   0x08048815 <+205>:   movzx  eax,BYTE PTR [eax] 
+
+   check if char is less 0x1f 
+   0x08048818 <+208>:   cmp    al,0x1f 
    0x0804881a <+210>:   jg     0x8048823 <auth+219>
    0x0804881c <+212>:   mov    eax,0x1
    0x08048821 <+217>:   jmp    0x8048877 <auth+303>
-   0x08048823 <+219>:   mov    eax,DWORD PTR [ebp-0x14]
-   0x08048826 <+222>:   add    eax,DWORD PTR [ebp+0x8]
-   0x08048829 <+225>:   movzx  eax,BYTE PTR [eax]
-   0x0804882c <+228>:   movsx  eax,al
+
+   ---need to be write in the code -----
+   0x08048823 <+219>:   mov    eax,DWORD PTR [ebp-0x14]// int i 
+   0x08048826 <+222>:   add    eax,DWORD PTR [ebp+0x8] // login + i
+   0x08048829 <+225>:   movzx  eax,BYTE PTR [eax] // login[i]
+   0x0804882c <+228>:   movsx  eax,al 
    0x0804882f <+231>:   mov    ecx,eax
-   0x08048831 <+233>:   xor    ecx,DWORD PTR [ebp-0x10]
+   0x08048831 <+233>:   xor    ecx,DWORD PTR [ebp-0x10] // xor with var_1 
    0x08048834 <+236>:   mov    edx,0x88233b2b
    0x08048839 <+241>:   mov    eax,ecx
    0x0804883b <+243>:   mul    edx
@@ -147,11 +152,15 @@ Dump of assembler code for function auth:
    0x08048852 <+266>:   mov    eax,edx
    0x08048854 <+268>:   add    DWORD PTR [ebp-0x10],eax
    0x08048857 <+271>:   add    DWORD PTR [ebp-0x14],0x1
-   0x0804885b <+275>:   mov    eax,DWORD PTR [ebp-0x14]
-   0x0804885e <+278>:   cmp    eax,DWORD PTR [ebp-0xc]
-   0x08048861 <+281>:   jl     0x804880f <auth+199>
-   0x08048863 <+283>:   mov    eax,DWORD PTR [ebp+0xc]
-   0x08048866 <+286>:   cmp    eax,DWORD PTR [ebp-0x10]
+
+   loop start here 
+   0x0804885b <+275>:   mov    eax,DWORD PTR [ebp-0x14] // i
+   0x0804885e <+278>:   cmp    eax,DWORD PTR [ebp-0xc] // compare i with len of login
+   0x08048861 <+281>:   jl     0x804880f <auth+199> // if i < len of login loop again
+   0x08048863 <+283>:   mov    eax,DWORD PTR [ebp+0xc] // the serial arg
+   
+   compre the serial with hashed username
+   0x08048866 <+286>:   cmp    eax,DWORD PTR [ebp-0x10] // compare serial with var_1
    0x08048869 <+289>:   je     0x8048872 <auth+298>
    
    0x0804886b <+291>:   mov    eax,0x1
