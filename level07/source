@@ -11,19 +11,20 @@ int store_number()
     puts(" Index:");
     int index = getunum();
     unsigned int edx = 2863311531; // 0xaaaaaaab
-    unsigned int eax = index;
 
-    eax *= edx;  // Multiply eax by edx
-    edx >>= 1;   // Right shift edx by 1
-    eax = edx;   // Copy edx to eax
-    eax += eax;  // Multiply eax by 2
-    eax += edx;  // Add edx to eax
-    edx = index; // Copy ecx to edx
-    edx -= eax;  // Subtract eax from edx
+    // eax *= edx;  // Multiply eax by edx
+    // edx >>= 1;   // Right shift edx by 1
+    // eax = edx;   // Copy edx to eax
+    // eax += eax;  // Multiply eax by 2
+    // eax += edx;  // Add edx to eax
+    // edx = index; // Copy ecx to edx
+    // edx -= eax;  // Subtract eax from edx
     // Test if edx is zero
-    if (edx == 0)
+    if (index % 3 == 0 || number >> 0x18 != 0xb7)
     {
-        store_number();
+        puts("*** ERROR! ***\n");
+        puts("This index is reserved for wil!\n")
+            puts("*** ERROR! ***\n");
     }
     else
     {

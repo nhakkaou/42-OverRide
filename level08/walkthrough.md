@@ -1,4 +1,4 @@
-## level08
+# level08
 
 During our investigation using gdb, it became evident that the binary takes a specific input file as a parameter. Its primary function involves generating a backup of the file within the directory "./backups" and simultaneously logging relevant information to the file named "backups/.log".
 
