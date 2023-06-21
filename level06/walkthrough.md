@@ -11,7 +11,7 @@ level06@OverRide:~$ ./level06
 ***********************************
 ***** NEW ACCOUNT DETECTED ********
 ***********************************
--> Enter Serial: 123456
+-> Enter Serial: 123456789
 ```
 
 let try to debug it with gdb and see what happens, we have a `main` function and a `auth` function , the `main` function ask for a username and a password and then call the `auth` function with the username and the password as arguments and then check the return value of the `auth` function if it's 0 it print `Authenticated` and run system with /bin/sh as argument.
